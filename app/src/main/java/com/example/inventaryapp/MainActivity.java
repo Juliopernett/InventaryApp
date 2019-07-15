@@ -1,55 +1,80 @@
 package com.example.inventaryapp;
 
+import android.content.Intent;
 import android.os.Bundle;
-
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import java.util.ArrayList;
+
 
 public class MainActivity extends AppCompatActivity {
 
+    private RecyclerView lstOpciones;
+    private Intent i;
+    private ArrayList<Telefono> telefonos;
+    private LinearLayoutManager llm;
+    private String db = "Personas";
+    private DatabaseReference databaseReference;
+
     @Override
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
+        lstOpciones = findViewById(R.id.lstCelulares);
+        telefonos = new ArrayList<>();
+        final AdaptadorTelefono adapter = new AdaptadorTelefono(telefonos);
+        llm = new LinearLayoutManager(this);
+        llm.setOrientation(1);
+        lstOpciones.setLayoutManager(llm);
+        lstOpciones.setAdapter(adapter);
+
+        databaseReference = FirebaseDatabase.getInstance().getReference();
+        databaseReference.child(db).addValueEventListener(new ValueEventListener() {
             @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+            /*estar pendiente cuando hay un cambio en producción, recorre el arbol agrega esas personas al arbol*/
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                telefonos.clear();
+                if(dataSnapshot.exists()){
+                    for(DataSnapshot snapshot : dataSnapshot.getChildren() ){
+                        Telefono p = snapshot.getValue(Telefono.class);
+                        telefonos.add(p);
+                    }
+                }
+                adapter.notifyDataSetChanged();
+                Datos.setPersonas(telefonos);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
             }
         });
+
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
+
+    public void agregarPersona(View v){
+        i = new Intent(MainActivity.this, Agregar_telefonos.class);
+        startActivity(i);
+        finish();
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
 }
