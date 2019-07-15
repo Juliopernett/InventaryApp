@@ -1,6 +1,6 @@
 package com.example.inventaryapp;
 
-public class telefonos {
+public class Telefono {
     private String id;
     private int foto;
     private int codigo;
@@ -8,7 +8,7 @@ public class telefonos {
     private String modelo;
     private int cantidad;
 
-    public telefonos(String id, int foto, int codigo, String marca, String modelo, int cantidad) {
+    public Telefono(String id, int foto, int codigo, String marca, String modelo, int cantidad) {
         this.id = id;
         this.foto = foto;
         this.codigo = codigo;
