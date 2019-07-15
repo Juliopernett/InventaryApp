@@ -2,13 +2,10 @@ package com.example.inventaryapp;
 
 public class Telefono {
     private String id;
-    private int foto;
-    private int codigo;
-    private String marca;
-    private String modelo;
-    private int cantidad;
+    private int foto, cantidad;
+    private String codigo, marca,modelo;
 
-    public Telefono(String id, int foto, int codigo, String marca, String modelo, int cantidad) {
+    public Telefono(String id, int foto, String codigo, String marca, String modelo, int cantidad) {
         this.id = id;
         this.foto = foto;
         this.codigo = codigo;
@@ -33,11 +30,11 @@ public class Telefono {
         this.foto = foto;
     }
 
-    public int getCodigo() {
+    public String getCodigo() {
         return codigo;
     }
 
-    public void setCodigo(int codigo) {
+    public void setCodigo(String codigo) {
         this.codigo = codigo;
     }
 
@@ -64,4 +61,17 @@ public class Telefono {
     public void setCantidad(int cantidad) {
         this.cantidad = cantidad;
     }
+
+    public void guardar(){
+        Datos.agregar(this);
+    }
+
+    public void eliminar(){
+        Datos.eliminar(this);
+    }
+
+    public  void editar(){
+        Datos.editar(this);
+    }
+
 }
