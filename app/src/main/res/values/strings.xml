@@ -1,4 +1,12 @@
 <resources>
     <string name="app_name">InventaryApp</string>
-    <string name="action_settings">Settings</string>
+    <string name="action_settings">Configuraci´´on</string>
+        <string name="codigo">Código</string>
+        <string name="marca">Marca</string>
+        <string name="modelo">Módelo</string>
+        <string name="titulo">Agregar nuevo telefono</string>
+        <string name="agregar">Agregar</string>
+        <string name="limpiar">Limpiar</string>
+        <string name="cantidad">Cantidad</string>
+        <string name="mensaje">Registro guardado exitosamente</string>
 </resources>
