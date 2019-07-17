@@ -1,7 +1,7 @@
 package com.example.inventaryapp;
-import com.google.firebase.FirebaseApp;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
 import java.util.ArrayList;
 public class Datos {
     private static  String db = "Telefonos";
@@ -29,7 +29,7 @@ public class Datos {
         return databaseReference.push().getKey();
     }
 
-    public  static  void setPersonas(ArrayList<Telefono> telefonos){
+    public  static  void setTelefonos(ArrayList<Telefono> telefonos){
         Datos.telefonos=telefonos;
     }
 

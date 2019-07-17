@@ -1,18 +1,21 @@
 package com.example.inventaryapp;
-import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
-import java.util.ArrayList;
-import android.content.Intent;
+import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.snackbar.Snackbar;
-
+import java.util.ArrayList;
 import java.util.Random;
-
 
 public class Agregar_telefonos extends AppCompatActivity {
     private ArrayList<Integer> fotos;
     private EditText codigo, marca, modelo, cantidad;
+    TextView prueba;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,14 +26,17 @@ public class Agregar_telefonos extends AppCompatActivity {
             fotos.add(R.drawable.images);
             fotos.add(R.drawable.images2);
             fotos.add(R.drawable.images3);
+            fotos.add(R.drawable.images4);
 
             codigo = findViewById(R.id.txtCodigo);
             marca = findViewById(R.id.txtMarca);
             modelo = findViewById(R.id.txtModelo);
             cantidad = findViewById(R.id.txtCantidad);
+            prueba = findViewById(R.id.txtPrueba);
+
     }
 
-    public void guardar(View v){
+   public void guardar(View v){
 
         String id, mar, mod, cod;
         int foto, cant;
@@ -40,7 +46,7 @@ public class Agregar_telefonos extends AppCompatActivity {
         mar = marca.getText().toString();
         mod = modelo.getText().toString();
         cant = Integer.parseInt(cantidad.getText().toString());
-
+        /*prueba.setText(""+ cod +" "+ mar +" "+ mod +" "+ cant +" "+id+" "+foto);*/
         Telefono t = new Telefono (id, foto, cod, mar, mod, cant);
         t.guardar();
         limpiar();
@@ -56,6 +62,7 @@ public class Agregar_telefonos extends AppCompatActivity {
         marca.setText("");
         modelo.setText("");
         cantidad.setText("");
+        prueba.setText("");
         codigo.requestFocus();
     }
 
@@ -67,9 +74,9 @@ public class Agregar_telefonos extends AppCompatActivity {
     }
 
     public void onBackPressed(){
-        finish();
         Intent i = new Intent(Agregar_telefonos.this, MainActivity.class);
         startActivity(i);
+        finish();
     }
 
 }

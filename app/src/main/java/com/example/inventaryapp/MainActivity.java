@@ -2,22 +2,20 @@ package com.example.inventaryapp;
 
 import android.content.Intent;
 import android.os.Bundle;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
+import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import android.view.View;
-import android.view.Menu;
-import android.view.MenuItem;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import java.util.ArrayList;
 
 
@@ -27,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
     private Intent i;
     private ArrayList<Telefono> telefonos;
     private LinearLayoutManager llm;
-    private String db = "Personas";
+    private String db = "Telefonos";
     private DatabaseReference databaseReference;
 
     @Override
@@ -40,26 +38,27 @@ public class MainActivity extends AppCompatActivity {
 
         lstOpciones = findViewById(R.id.lstCelulares);
         telefonos = new ArrayList<>();
-        final AdaptadorTelefono adapter = new AdaptadorTelefono(telefonos);
+        final AdaptadorTelefono
+                adapter = new AdaptadorTelefono(telefonos);
         llm = new LinearLayoutManager(this);
-        llm.setOrientation(1);
+        /*llm.setOrientation(1);ESTO LLEVA UN 1*/
         lstOpciones.setLayoutManager(llm);
         lstOpciones.setAdapter(adapter);
-
         databaseReference = FirebaseDatabase.getInstance().getReference();
-        databaseReference.child(db).addValueEventListener(new ValueEventListener() {
+        databaseReference.child(db);
+        databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             /*estar pendiente cuando hay un cambio en producción, recorre el arbol agrega esas personas al arbol*/
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 telefonos.clear();
-                if(dataSnapshot.exists()){
-                    for(DataSnapshot snapshot : dataSnapshot.getChildren() ){
+                if (dataSnapshot.exists()) {
+                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                         Telefono p = snapshot.getValue(Telefono.class);
                         telefonos.add(p);
                     }
                 }
                 adapter.notifyDataSetChanged();
-                Datos.setPersonas(telefonos);
+                Datos.setTelefonos(telefonos);
             }
 
             @Override

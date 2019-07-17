@@ -64,7 +64,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
 
-            android:onClick="@string/agregar"
+            android:onClick="guardar"
             android:text="@string/agregar" />
 
         <Button
@@ -74,9 +74,14 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
 
-            android:onClick="@string/limpiar"
+            android:onClick="limpiar"
             android:text="@string/limpiar" />
  </LinearLayout>
+
+    <TextView
+        android:id="@+id/txtPrueba"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
 </LinearLayout>
 
