@@ -10,4 +10,8 @@
     <string name="mensaje">Record saved successfully</string>
     <string name="modelo">Model</string>
     <string name="titulo">Add new phone</string>
+    <string name="error_1">The code field can not be empty</string>
+    <string name="error_2">The field can not be empty</string>
+    <string name="error_3">The model field can not be empty</string>
+    <string name="error_4">The quantity field can not be empty</string>
 </resources>

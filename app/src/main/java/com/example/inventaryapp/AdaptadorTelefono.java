@@ -18,6 +18,7 @@ public class AdaptadorTelefono extends  RecyclerView.Adapter<AdaptadorTelefono.T
         this.telefonos=telefonos;
     }
 
+
     @Override
     public TelefonoViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         //vas a usar el layaut que ya cree
@@ -27,12 +28,12 @@ public class AdaptadorTelefono extends  RecyclerView.Adapter<AdaptadorTelefono.T
 
     @Override
     public void onBindViewHolder(@NonNull TelefonoViewHolder telefonoViewHolder, int i) {
-        Telefono p = telefonos.get(i);
-        telefonoViewHolder.foto.setImageResource(p.getFoto());
-        telefonoViewHolder.codigo.setText(p.getCodigo());
-        telefonoViewHolder.marca.setText(p.getMarca());
-        telefonoViewHolder.modelo.setText(p.getModelo());
-        telefonoViewHolder.cantidad.setText(p.getCantidad());
+        Telefono t = telefonos.get(i);
+        telefonoViewHolder.foto.setImageResource(t.getFoto());
+        telefonoViewHolder.codigo.setText(t.getCodigo());
+        telefonoViewHolder.marca.setText(t.getMarca());
+        telefonoViewHolder.modelo.setText(t.getModelo());
+        telefonoViewHolder.cantidad.setText(t.getCantidad());
     }
 
     @Override
@@ -55,5 +56,6 @@ public class AdaptadorTelefono extends  RecyclerView.Adapter<AdaptadorTelefono.T
             cantidad = v.findViewById(R.id.lblCantidad);
         }
     }
+
 }
 

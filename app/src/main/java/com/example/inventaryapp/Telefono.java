@@ -6,13 +6,9 @@ public class Telefono {
     private String codigo, marca,modelo;
 
     public Telefono(String id, int foto, String codigo, String marca, String modelo, int cantidad) {
-        this.id = id;
-        this.foto = foto;
-        this.codigo = codigo;
-        this.marca = marca;
-        this.modelo = modelo;
-        this.cantidad = cantidad;
+
     }
+    public Telefono() {}
 
     public String getId() {
         return id;

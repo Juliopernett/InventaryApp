@@ -7,7 +7,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.android.material.snackbar.Snackbar;
+
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -15,13 +17,12 @@ public class Agregar_telefonos extends AppCompatActivity {
     private ArrayList<Integer> fotos;
     private EditText codigo, marca, modelo, cantidad;
     TextView prueba;
-
+    private ArrayList<Telefono> telefonos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_agregar_telefonos);
-
             fotos = new ArrayList<>();
             fotos.add(R.drawable.images);
             fotos.add(R.drawable.images2);
@@ -33,36 +34,34 @@ public class Agregar_telefonos extends AppCompatActivity {
             modelo = findViewById(R.id.txtModelo);
             cantidad = findViewById(R.id.txtCantidad);
             prueba = findViewById(R.id.txtPrueba);
-
     }
 
    public void guardar(View v){
-
-        String id, mar, mod, cod;
-        int foto, cant;
-        id = Datos.gesID();
-        foto = this.fotoAleatoria();
-        cod = codigo.getText().toString();
-        mar = marca.getText().toString();
-        mod = modelo.getText().toString();
-        cant = Integer.parseInt(cantidad.getText().toString());
-        /*prueba.setText(""+ cod +" "+ mar +" "+ mod +" "+ cant +" "+id+" "+foto);*/
-        Telefono t = new Telefono (id, foto, cod, mar, mod, cant);
-        t.guardar();
-        limpiar();
-        Snackbar.make(v,getString(R.string.mensaje), Snackbar.LENGTH_SHORT).show();
+        if (validar()){
+           String id, mar, mod, cod;
+           int foto, cant;
+           id = Datos.gesID();
+           foto = this.fotoAleatoria();
+           cod = codigo.getText().toString();
+           mar = marca.getText().toString();
+           mod = modelo.getText().toString();
+           cant = Integer.parseInt(cantidad.getText().toString());
+           /* prueba.setText("" + codi + " " + cod + " " + mar + " " + mod + " " + cant + " " + id + " " + foto);*/
+           Telefono t = new Telefono(id, foto, cod, mar, mod, cant);
+           t.guardar();
+           limpiar();
+           Snackbar.make(v, getString(R.string.mensaje), Snackbar.LENGTH_SHORT).show();
+       }
     }
 
     public void limpiar(View v){
         limpiar();
     }
-
     public  void limpiar(){
         codigo.setText("");
         marca.setText("");
         modelo.setText("");
         cantidad.setText("");
-        prueba.setText("");
         codigo.requestFocus();
     }
 
@@ -77,6 +76,28 @@ public class Agregar_telefonos extends AppCompatActivity {
         Intent i = new Intent(Agregar_telefonos.this, MainActivity.class);
         startActivity(i);
         finish();
+    }
+
+    public boolean validar(){
+        if(codigo.getText().toString().isEmpty()){
+            codigo.setError(getResources().getString(R.string.error_1));
+            codigo.requestFocus();
+            return false;
+        }else if(marca.getText().toString().isEmpty()) {
+            marca.setError(getResources().getString(R.string.error_2));
+            marca.requestFocus();
+            return false;
+        }else if(modelo.getText().toString().isEmpty()) {
+            modelo.setError(getResources().getString(R.string.error_3));
+            modelo.requestFocus();
+            return false;
+        }else if(cantidad.getText().toString().isEmpty()) {
+            cantidad.setError(getResources().getString(R.string.error_4));
+            cantidad.requestFocus();
+            return false;
+        }
+        return true;
+        /*FALTA VALIDAR EL CODIGO UNICO*/
     }
 
 }

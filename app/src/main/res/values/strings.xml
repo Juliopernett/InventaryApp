@@ -9,4 +9,9 @@
         <string name="limpiar">Limpiar</string>
         <string name="cantidad">Cantidad</string>
         <string name="mensaje">Registro guardado exitosamente</string>
+
+        <string name="error_1">El campo código no puede ser vacio</string>
+        <string name="error_2">El campo marca no puede ser vacio</string>
+        <string name="error_3">El campo módelo no puede ser vacio</string>
+        <string name="error_4">El campo cantidad no puede estar vacio</string>
 </resources>

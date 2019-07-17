@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
     private Intent i;
     private ArrayList<Telefono> telefonos;
     private LinearLayoutManager llm;
-    private String db = "Telefonos";
+    private static  String db = "Telefonos";
     private DatabaseReference databaseReference;
 
     @Override
@@ -38,17 +38,15 @@ public class MainActivity extends AppCompatActivity {
 
         lstOpciones = findViewById(R.id.lstCelulares);
         telefonos = new ArrayList<>();
-        final AdaptadorTelefono
-                adapter = new AdaptadorTelefono(telefonos);
+        final AdaptadorTelefono adapter = new AdaptadorTelefono(telefonos);
         llm = new LinearLayoutManager(this);
-        /*llm.setOrientation(1);ESTO LLEVA UN 1*/
+        llm.setOrientation(1);
         lstOpciones.setLayoutManager(llm);
         lstOpciones.setAdapter(adapter);
         databaseReference = FirebaseDatabase.getInstance().getReference();
         databaseReference.child(db);
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
-            /*estar pendiente cuando hay un cambio en producción, recorre el arbol agrega esas personas al arbol*/
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 telefonos.clear();
                 if (dataSnapshot.exists()) {
@@ -66,11 +64,10 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-
     }
 
 
-    public void agregarPersona(View v){
+    public void agregarTelefono(View v){
         i = new Intent(MainActivity.this, Agregar_telefonos.class);
         startActivity(i);
         finish();

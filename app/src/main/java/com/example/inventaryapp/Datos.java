@@ -33,7 +33,7 @@ public class Datos {
         Datos.telefonos=telefonos;
     }
 
-    public static ArrayList<Telefono> optenet(){
+    public static ArrayList<Telefono> optener(){
         return Datos.telefonos;
     }
 }
