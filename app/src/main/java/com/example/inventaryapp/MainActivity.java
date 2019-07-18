@@ -4,17 +4,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
@@ -36,11 +31,12 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+/*
         lstOpciones = findViewById(R.id.lstCelulares);
         telefonos = new ArrayList<>();
         final AdaptadorTelefono adapter = new AdaptadorTelefono(telefonos);
         llm = new LinearLayoutManager(this);
-        llm.setOrientation(1);
+        llm.setOrientation(RecyclerView.VERTICAL);
         lstOpciones.setLayoutManager(llm);
         lstOpciones.setAdapter(adapter);
         databaseReference = FirebaseDatabase.getInstance().getReference();
@@ -63,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
             }
-        });
+        });*/
     }
 
 

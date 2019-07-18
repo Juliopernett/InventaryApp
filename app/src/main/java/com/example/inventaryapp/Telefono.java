@@ -5,10 +5,14 @@ public class Telefono {
     private int foto, cantidad;
     private String codigo, marca,modelo;
 
-    public Telefono(String id, int foto, String codigo, String marca, String modelo, int cantidad) {
-
+    public Telefono(String id, int foto, int cantidad, String codigo, String marca, String modelo) {
+        this.id = id;
+        this.foto = foto;
+        this.cantidad = cantidad;
+        this.codigo = codigo;
+        this.marca = marca;
+        this.modelo = modelo;
     }
-    public Telefono() {}
 
     public String getId() {
         return id;
@@ -24,6 +28,14 @@ public class Telefono {
 
     public void setFoto(int foto) {
         this.foto = foto;
+    }
+
+    public int getCantidad() {
+        return cantidad;
+    }
+
+    public void setCantidad(int cantidad) {
+        this.cantidad = cantidad;
     }
 
     public String getCodigo() {
@@ -48,14 +60,6 @@ public class Telefono {
 
     public void setModelo(String modelo) {
         this.modelo = modelo;
-    }
-
-    public int getCantidad() {
-        return cantidad;
-    }
-
-    public void setCantidad(int cantidad) {
-        this.cantidad = cantidad;
     }
 
     public void guardar(){

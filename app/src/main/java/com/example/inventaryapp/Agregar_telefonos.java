@@ -47,7 +47,7 @@ public class Agregar_telefonos extends AppCompatActivity {
            mod = modelo.getText().toString();
            cant = Integer.parseInt(cantidad.getText().toString());
            /* prueba.setText("" + codi + " " + cod + " " + mar + " " + mod + " " + cant + " " + id + " " + foto);*/
-           Telefono t = new Telefono(id, foto, cod, mar, mod, cant);
+           Telefono t = new Telefono(id,foto,cant,cod,mar,mod);
            t.guardar();
            limpiar();
            Snackbar.make(v, getString(R.string.mensaje), Snackbar.LENGTH_SHORT).show();
