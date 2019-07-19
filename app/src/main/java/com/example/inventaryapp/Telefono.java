@@ -14,6 +14,8 @@ public class Telefono {
         this.modelo = modelo;
     }
 
+    public Telefono(){}
+
     public String getId() {
         return id;
     }

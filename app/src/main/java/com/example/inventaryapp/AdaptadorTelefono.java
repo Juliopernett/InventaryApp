@@ -1,52 +1,55 @@
 package com.example.inventaryapp;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-public class AdaptadorTelefono extends  RecyclerView.Adapter<AdaptadorTelefono.TelefonoViewHolder> {
+public class AdaptadorTelefono extends  RecyclerView.Adapter<AdaptadorTelefono.TelefonoViewHolder>{
+
     private ArrayList<Telefono> telefonos;
 
     public  AdaptadorTelefono(ArrayList<Telefono>telefonos){
         this.telefonos=telefonos;
     }
-
-
     @Override
-    public TelefonoViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        //vas a usar el layaut que ya cree
-        View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_telefonos, viewGroup, false);
-        return new TelefonoViewHolder(v);
+    public TelefonoViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        /*vas a usar el layaut que ya cree
+        inflr extendiendo la culumna en el padre y no va a pararlo*/
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_telefonos, parent, false);
+        //devolvemos el holder que hemos extendido del view group en nuestra actividad
+        TelefonoViewHolder holder = new TelefonoViewHolder(v);
+        return holder;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull TelefonoViewHolder telefonoViewHolder, int i) {
-        Telefono t = telefonos.get(i);
-        telefonoViewHolder.foto.setImageResource(t.getFoto());
-        telefonoViewHolder.codigo.setText(t.getCodigo());
-        telefonoViewHolder.marca.setText(t.getMarca());
-        telefonoViewHolder.modelo.setText(t.getModelo());
-        telefonoViewHolder.cantidad.setText(t.getCantidad());
+    /*LO QUE QUEREMOS HACER CON NUESTRO RECYCLER VIEW*/
+    public void onBindViewHolder(@NonNull TelefonoViewHolder holder, int position) {
+        Telefono t = telefonos.get(position);
+        holder.foto.setImageResource(t.getFoto());
+        holder.codigo.setText(t.getCodigo());
+        holder.marca.setText(t.getMarca());
+        holder.modelo.setText(t.getModelo());
+        holder.cantidad.setText(t.getCantidad()+"");
     }
 
     @Override
+    /*REGRESA EL NUMERO DE FILAS DE NUESTRO RECYLCLER VIEW*/
     public int getItemCount() {
         return telefonos.size();
     }
 
     public static class TelefonoViewHolder extends RecyclerView.ViewHolder{
-        private ImageView foto;
-        private TextView codigo, marca, modelo, cantidad;
-        private View v;
-
-        public  TelefonoViewHolder(View itemView){
+        /*Declaramos los campos que tenemos en nuestro contenedor (ITEM_telefonos)*/
+        ImageView foto;
+        TextView codigo, marca, modelo, cantidad;
+        View v;
+        /*lo que vamos a mostrara (para el ejemplo es nuestro ITEM_telefonos)*/
+        public TelefonoViewHolder(View itemView) {
             super(itemView);
             v = itemView;
             foto = v.findViewById(R.id.foto);
@@ -56,6 +59,5 @@ public class AdaptadorTelefono extends  RecyclerView.Adapter<AdaptadorTelefono.T
             cantidad = v.findViewById(R.id.lblCantidad);
         }
     }
-
 }
 
