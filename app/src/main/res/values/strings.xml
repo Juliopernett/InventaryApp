@@ -14,4 +14,5 @@
         <string name="error_2">El campo marca no puede ser vacio</string>
         <string name="error_3">El campo módelo no puede ser vacio</string>
         <string name="error_4">El campo cantidad no puede estar vacio</string>
+        <string name="error_5">El código ingresado ya existe</string>
 </resources>

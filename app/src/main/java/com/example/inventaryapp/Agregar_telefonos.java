@@ -9,6 +9,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.database.DatabaseReference;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -17,7 +18,10 @@ public class Agregar_telefonos extends AppCompatActivity {
     private ArrayList<Integer> fotos;
     private EditText codigo, marca, modelo, cantidad;
     TextView prueba;
-    private ArrayList<Telefono> telefonos;
+    int band = 0;
+
+    private static  String db = "Telefonos";
+    private DatabaseReference databaseReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,19 +42,20 @@ public class Agregar_telefonos extends AppCompatActivity {
 
    public void guardar(View v){
         if (validar()){
-           String id, mar, mod, cod;
-           int foto, cant;
-           id = Datos.gesID();
-           foto = this.fotoAleatoria();
-           cod = codigo.getText().toString();
-           mar = marca.getText().toString();
-           mod = modelo.getText().toString();
-           cant = Integer.parseInt(cantidad.getText().toString());
-           /* prueba.setText("" + codi + " " + cod + " " + mar + " " + mod + " " + cant + " " + id + " " + foto);*/
-           Telefono t = new Telefono(id,foto,cant,cod,mar,mod);
-           t.guardar();
-           limpiar();
-           Snackbar.make(v, getString(R.string.mensaje), Snackbar.LENGTH_SHORT).show();
+
+            String id, mar, mod, cod;
+            int foto, cant;
+            id = Datos.gesID();
+            foto = this.fotoAleatoria();
+            cod = codigo.getText().toString();
+            mar = marca.getText().toString();
+            mod = modelo.getText().toString();
+            cant = Integer.parseInt(cantidad.getText().toString());
+            /* prueba.setText("" + codi + " " + cod + " " + mar + " " + mod + " " + cant + " " + id + " " + foto);*/
+            Telefono t = new Telefono(id,foto,cant,cod,mar,mod);
+            t.guardar();
+            limpiar();
+            Snackbar.make(v, getString(R.string.mensaje), Snackbar.LENGTH_SHORT).show();
        }
     }
 
@@ -79,6 +84,7 @@ public class Agregar_telefonos extends AppCompatActivity {
     }
 
     public boolean validar(){
+
         if(codigo.getText().toString().isEmpty()){
             codigo.setError(getResources().getString(R.string.error_1));
             codigo.requestFocus();
@@ -95,6 +101,11 @@ public class Agregar_telefonos extends AppCompatActivity {
             cantidad.setError(getResources().getString(R.string.error_4));
             cantidad.requestFocus();
             return false;
+        }else if (Datos.consultarCodigo(codigo.getText().toString())){
+            codigo.setError(getResources().getString(R.string.error_5));
+            codigo.requestFocus();
+            return false;
+
         }
         return true;
         /*FALTA VALIDAR EL CODIGO UNICO*/

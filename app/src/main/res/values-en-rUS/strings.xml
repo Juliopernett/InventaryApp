@@ -14,4 +14,5 @@
     <string name="error_2">The field can not be empty</string>
     <string name="error_3">The model field can not be empty</string>
     <string name="error_4">The quantity field can not be empty</string>
+    <string name="error_5">The code entered already exists</string>
 </resources>

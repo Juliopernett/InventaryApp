@@ -24,6 +24,20 @@ public class Datos {
         databaseReference.child(db).child(t.getId()).removeValue();
     }
 
+    public static ArrayList<Telefono> obtener(){
+        return Datos.telefonos;
+    }
+    public static boolean consultarCodigo(String  codigo){
+        boolean yes = false;
+        for (Telefono c:telefonos) {
+            if (c.getCodigo().equalsIgnoreCase(codigo)){
+                yes = true;
+                break;
+            }
+        }
+        return yes;
+    }
+
     /*manda una peticion al servidor y me trae una llave unica*/
     public static String gesID(){
         return databaseReference.push().getKey();
